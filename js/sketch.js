@@ -8,8 +8,8 @@ let inputImg, inputImg1, styleImg, inputImage;
 let input_source=0;  // 0: for example, 1: for upload image
 let outputImgContainer;
 let model_num = 0;
-let currentModel = 'starrynight'; 
-let currentInitModel = 'starrynight';  
+let currentModel = 'YuNong_Paint_01'; 
+let currentInitModel = 'YuNong_Paint_01';  
 let uploader;
 let webcam = false;
 let modelReady = false;
