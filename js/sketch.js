@@ -205,11 +205,9 @@ function onPredictClick2() {
 }
 
 function saveimgas() {
-  var imgOrUrl;
-  imgOrUrl = outputImgContainer.elt;
-  //console.log(imgOrUrl);
-  if (typeof imgOrUrl == 'object')
-     imgOrUrl = outputImgContainer.elt.src;
-  //console.log(imgOrUrl);
-  window.location.href=imgOrUrl.replace("image/png","image/octet-stream");
+  var download_link=document.createElement('a');  //create a download element<a> to download image
+  download_link.href=outputImgContainer.elt.src;
+  console.log(download_link.href);
+  download_link.download='download.png';  //set the download image filename as download.png
+  download_link.click();
 }
