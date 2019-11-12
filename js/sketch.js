@@ -64,7 +64,9 @@ function transferImg() {
     console.log("transferImg");
      
     nets = new ml5.styleTransfer('models/' + currentModel + '/', modelLoaded);
- 
+    
+    sharedImg = select('#sharedimg');
+    sharedImg.src = outputImgContainer.elt.src;
 }
 
 function modelLoaded1() {
