@@ -64,7 +64,11 @@ function transferImg() {
     console.log("transferImg");
      
     nets = new ml5.styleTransfer('models/' + currentModel + '/', modelLoaded);
-    
+ 
+    sharedImg = select('#sharedimg');
+    sharedImg.href = outputImgContainer.elt.src;
+    sharedImg.click();
+
 }
 
 function modelLoaded1() {
@@ -207,7 +211,7 @@ function onPredictClick2() {
 function saveimgas() {
   var download_link=document.createElement('a');  //create a download element<a> to download image
   download_link.href=outputImgContainer.elt.src;
-  console.log(download_link);
+  console.log(download_link.href);
   download_link.download='download.png';  //set the download image filename as download.png
   download_link.click();
 }
