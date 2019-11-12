@@ -207,7 +207,7 @@ function onPredictClick2() {
 function saveimgas() {
   var download_link=document.createElement('a');  //create a download element<a> to download image
   download_link.href=outputImgContainer.elt.src;
-  console.log(download_link.href);
+  console.log(download_link);
   download_link.download='download.png';  //set the download image filename as download.png
   download_link.click();
 }
