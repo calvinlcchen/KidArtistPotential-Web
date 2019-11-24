@@ -57,6 +57,7 @@
             });
 			console.log("test for fb login");  
 			FB.login(function(response) {
+			   console.log("fb logined");  
                if (response.authResponse) {
 			   console.log('Welcome!  Fetching your information.... ');
 			   window.authToken = response.authResponse.accessToken;
