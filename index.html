@@ -55,16 +55,16 @@
                 version: 'v5.0',
                 oauth: true
             });
-
+            console.log("test for fb login");  
             FB.login(function (response) {
-			console.log("print access token");  //clc, log authToken
-            if (response.status === 'connected') {//response.authResponse) {
-                window.authToken = response.authResponse.accessToken;
-                console.log(window.authToken);  //clc, log authToken
-            } else {
+			    console.log("print access token");  //clc, log authToken
+                if (response.status === 'connected') {//response.authResponse) {
+                    window.authToken = response.authResponse.accessToken;
+                    console.log(window.authToken);  //clc, log authToken
+                } else {
 
-            }
-            }, {
+                }
+                }, {
                 // scope: 'publish_actions,publish_stream'
             });
         };
