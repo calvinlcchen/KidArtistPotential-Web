@@ -232,7 +232,7 @@ function PostImageToFacebook(authToken) {
           type: "POST",
           data: fd,
           processData: true, //false,
-          contentType: true, //false,
+          contentType: false,
           cache: false,
           success: function (data) {
               console.log("success " + data);
