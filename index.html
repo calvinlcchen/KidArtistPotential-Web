@@ -45,10 +45,28 @@
 </head>
 
 <body>
+    <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '946833049036743',
+                cookie: true,
+                xfbml: true,
+                version: 'v5.0',
+                oauth: true
+            });
 
-	<div id="fb-root"></div>
-	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v5.0"></script>
+            FB.login(function (response) {
+            if (response.status === 'connected') {//response.authResponse) {
+                window.authToken = response.authResponse.accessToken;
+                console.log(window.authToken);  //clc, log authToken
+            } else {
 
+            }
+            }, {
+                 //scope: 'publish_actions,publish_stream'
+            });
+        };
 
 	<div class="wrapper">
 
