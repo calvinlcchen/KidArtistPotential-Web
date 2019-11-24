@@ -231,8 +231,8 @@ function PostImageToFacebook(authToken) {
           url: "https://graph.facebook.com/me/photos?access_token=" + authToken,
           type: "POST",
           data: fd,
-          processData: false,
-          contentType: false,
+          processData: true, //false,
+          contentType: true, //false,
           cache: false,
           success: function (data) {
               console.log("success " + data);
