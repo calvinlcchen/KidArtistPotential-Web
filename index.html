@@ -2,6 +2,14 @@
 <html ng-app lang="en">
 <head>
 
+	<meta property="og:title" content="Vangogh Crazy World"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:image" content="https://calvinlcchen.github.io/KidArtistPotential-Web//result.png"/>
+	<meta property="og:description" content="Heroes of Might and Magic III event generator."/>
+	<link rel="image_src" href="https://calvinlcchen.github.io/KidArtistPotential-Web/result.jpg" />
+	<script src="js/script.js"></script>
+	<script src="js/base64binary.js"></script>
+
 	<ng-include src="'head.html'"></ng-include>
 
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,500,500i,600,700,800,900|Poppins:200,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900">
@@ -45,89 +53,6 @@
 </head>
 
 <body>
-   <!-- <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>-->
-    <script>
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '946833049036743',
-                cookie: true,
-                xfbml: true,
-                version: 'v5.0',
-                oauth: true
-            });
-			console.log("test for fb login");  
-			FB.login(function(response) {
-			   console.log("fb logined");  
-               if (response.authResponse) {
-			   console.log('Welcome!  Fetching your information.... ');
-			   window.authToken = response.authResponse.accessToken;
-               FB.api('/me', function(response) {
-                  console.log('Good to see you, ' + response.name + '.');
-               });
-               } else {
-                console.log('User cancelled login or did not fully authorize.');
-               }
-            });
-			console.log("after FB.login");
-			console.log(window.authToken);
-		};
-		(function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-	   }(document, 'script', 'facebook-jssdk'));
-	   
-	    // This is called with the results from from FB.getLoginStatus().
-	    function statusChangeCallback(response) {
-        console.log('statusChangeCallback');
-        console.log(response);
-        // The response object is returned with a status field that lets the
-        // app know the current login status of the person.
-        // Full docs on the response object can be found in the documentation
-        // for FB.getLoginStatus().
-        if (response.status === 'connected') {
-		  // Logged into your app and Facebook.
-		  window.authToken = response.authResponse.accessToken;
-		  console.log(window.authToken);
-          testAPI();
-        } else if (response.status === 'not_authorized') {
-          // The person is logged into Facebook, but not your app.
-          document.getElementById('status').innerHTML = 'Please log ' +
-            'into this app.';
-        } else {
-          // The person is not logged into Facebook, so we're not sure if
-          // they are logged into this app or not.
-          document.getElementById('status').innerHTML = 'Please log ' +
-            'into Facebook.';
-        }
-      }
-
-      // This function is called when someone finishes with the Login
-      // Button.  See the onlogin handler attached to it in the sample
-      // code below.
-      function checkLoginState() {
-        FB.getLoginStatus(function(response) {
-          statusChangeCallback(response);
-        });
-      }
-
-      // Here we run a very simple test of the Graph API after login is
-      // successful.  See statusChangeCallback() for when this call is made.
-      function testAPI() {
-        console.log('Welcome!  Fetching your information.... ');
-        FB.api('/me', function(response) {
-          console.log('Successful login for: ' + response.name);
-          document.getElementById('status').innerHTML =
-            'Thanks for logging in, ' + response.name + '!';
-        });
-
-	  }
-	</script>
-	
-	<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
 
 	<div class="wrapper">
 
@@ -392,7 +317,7 @@
 									<div id="output-img-container"></div>
 									<div class="style-container pt-15">
 										<!--<button class="button button-border black download-btn" onclick="saveimgas()"><i class="fa fa-download"></i></button> -->
-										<button class="button button-border black download-btn" onclick="PostImageToFacebook(window.authToken)"><i class="fa fa-download"></i></button>
+										<button class="share" onclick="postCanvasToFacebook()">Share event on Facebook</button>
 										<!--				<button class="button btn-block mb-10" onclick="onPredictClick()">Transfer</button>-->
 									</div>
 									<iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fcalvinlcchen.github.io%2FKidArtistPotential-Web%2F&layout=button_count&size=small&width=73&height=20&appId" width="73" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
