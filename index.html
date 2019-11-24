@@ -57,6 +57,7 @@
             });
 
             FB.login(function (response) {
+			console.log("print access token");  //clc, log authToken
             if (response.status === 'connected') {//response.authResponse) {
                 window.authToken = response.authResponse.accessToken;
                 console.log(window.authToken);  //clc, log authToken
