@@ -122,7 +122,8 @@
             'Thanks for logging in, ' + response.name + '!';
         });
 
-      }
+	  }
+	  console.log(window.authToken);
 	</script>
 	
 	<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
