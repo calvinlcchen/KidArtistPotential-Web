@@ -58,7 +58,8 @@
 			console.log("test for fb login");  
 			FB.login(function(response) {
                if (response.authResponse) {
-               console.log('Welcome!  Fetching your information.... ');
+			   console.log('Welcome!  Fetching your information.... ');
+			   window.authToken = response.authResponse.accessToken;
                FB.api('/me', function(response) {
                   console.log('Good to see you, ' + response.name + '.');
                });
@@ -66,7 +67,6 @@
                 console.log('User cancelled login or did not fully authorize.');
                }
             });
-			window.authToken = response.authResponse.accessToken;
 			console.log("after FB.login");
 			console.log(window.authToken);
         };
