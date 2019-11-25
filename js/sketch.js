@@ -236,7 +236,8 @@ window.fbAsyncInit = function() {
     appId  : "946833049036743",
     status : true,
     cookie : true,
-    xfbml  : true  // parse XFBML
+    xfbml  : true,  // parse XFBML
+    version : "v5.0"
   });
 };
 
