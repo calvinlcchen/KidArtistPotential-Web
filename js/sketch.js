@@ -212,41 +212,61 @@ function saveimgas() {
   download_link.click();
 }
 
-// Post a BASE64 Encoded PNG Image to facebook
-function PostImageToFacebook(authToken) {
-  //var canvas = document.getElementById("c");
-  //var imageData = outputImgContainer.elt.src.toDataURL("image/png");
-  try {
-      blob = outputImgContainer.elt.src; //dataURItoBlob(imageData);
-      console.log("blob:" + blob);
-  } catch (e) {
-      console.log(e);
-  }
-  var fd = new FormData();
-  fd.append("access_token", authToken);
-  fd.append("source", blob);
-  fd.append("message", "Photo Text");
-  try {
-      $.ajax({
-          url: "https://graph.facebook.com/me/photos?access_token=" + authToken,
-          type: "POST",
-          data: fd,
-          processData: false,
-          contentType: false,
-          cache: false,
-          success: function (data) {
-              console.log("success " + data);
-              $("#poster").html("Posted Canvas Successfully");
-          },
-          error: function (shr, status, data) {
-              console.log("error " + data + " Status " + shr.status);
-          },
-          complete: function () {
-              console.log("Posted to facebook");
-          }
-      });
 
-  } catch (e) {
-      console.log(e);
-  }
-}
+// from: http://stackoverflow.com/a/5303242/945521
+if ( XMLHttpRequest.prototype.sendAsBinary === undefined ) {
+  XMLHttpRequest.prototype.sendAsBinary = function(string) {
+      var bytes = Array.prototype.map.call(string, function(c) {
+          return c.charCodeAt(0) & 0xff;
+      });
+      this.send(new Uint8Array(bytes).buffer);
+  };
+};
+
+(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_US/all.js";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+window.fbAsyncInit = function() {
+  FB.init({
+    appId  : "946833049036743",
+    status : true,
+    cookie : true,
+    xfbml  : true  // parse XFBML
+  });
+};
+
+function postImageToFacebook( authToken, filename, mimeType, imageData, message )
+{
+
+    var xhr = new XMLHttpRequest();
+    xhr.open( 'POST', 'https://graph.facebook.com/me/photos?access_token=' + authToken, true );
+    xhr.onload = xhr.onerror = function() {
+        console.log( xhr.responseText );
+    };
+    xhr.send(imageData);
+
+};
+
+
+
+//===================new way ===============
+function postCanvasToFacebook() {
+	var decodedPng = outputImgContainer.elt.src;
+	FB.getLoginStatus(function(response) {
+	  if (response.status === "connected") {
+		postImageToFacebook(response.authResponse.accessToken, "result", "image/png", decodedPng, "KidArtistPotential-Web");
+	  } else if (response.status === "not_authorized") {
+		 FB.login(function(response) {
+			postImageToFacebook(response.authResponse.accessToken, "result", "image/png", decodedPng, "KidArtistPotential-Web");
+		 }, {scope: "publish_actions"});
+	  } else {
+		 FB.login(function(response)  {
+			postImageToFacebook(response.authResponse.accessToken, "result", "image/png", decodedPng, "KidArtistPotential-Web");
+		 }, {scope: "publish_actions"});
+	  }
+	 });
