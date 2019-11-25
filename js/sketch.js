@@ -269,4 +269,5 @@ function postCanvasToFacebook() {
 			postImageToFacebook(response.authResponse.accessToken, "result", "image/png", decodedPng, "KidArtistPotential-Web");
 		 }, {scope: "publish_actions"});
 	  }
-	 });
+   });
+  };
