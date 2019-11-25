@@ -256,7 +256,8 @@ function postImageToFacebook( authToken, filename, mimeType, imageData, message 
 
 //===================new way ===============
 function postCanvasToFacebook() {
-	var decodedPng = outputImgContainer.elt.src;
+  var decodedPng = outputImgContainer.elt.src;
+  console.log("blob == : " +decodedPng);
 	FB.getLoginStatus(function(response) {
 	  if (response.status === "connected") {
 		postImageToFacebook(response.authResponse.accessToken, "result", "image/png", decodedPng, "KidArtistPotential-Web");
