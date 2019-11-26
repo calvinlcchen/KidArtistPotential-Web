@@ -243,14 +243,52 @@ window.fbAsyncInit = function() {
 
 function postImageToFacebook( authToken, filename, mimeType, imageData, message )
 {
+        // this is the multipart/form-data boundary we'll use
+        var boundary = '----ThisIsTheBoundary1234567890';
+        // let's encode our image file, which is contained in the var
+        var formData = '--' + boundary + '\r\n'
+        formData += 'Content-Disposition: form-data; name="source"; filename="' + filename + '"\r\n';
+        formData += 'Content-Type: ' + mimeType + '\r\n\r\n';
+        for (var i = 0; i < imageData.length; ++i) {
+          formData += String.fromCharCode(imageData[i] & 0xff);
+        }
+        formData += '\r\n';
+        formData += '--' + boundary + '\r\n';
+        formData += 'Content-Disposition: form-data; name="message"\r\n\r\n';
+        formData += message + '\r\n'
+        formData += '--' + boundary + '--\r\n';
 
-    var xhr = new XMLHttpRequest();
-    xhr.open( 'POST', 'https://graph.facebook.com/me/photos?access_token=' + authToken, true );
-    xhr.onload = xhr.onerror = function() {
-        console.log( xhr.responseText );
-    };
-    xhr.send(imageData);
-    console.log("after send blob");
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://graph.facebook.com/me/photos?access_token=' + authToken, true);
+        xhr.onload = xhr.onerror = function () {
+          console.log(xhr.responseText);
+        };
+        xhr.setRequestHeader("Content-Type", "multipart/form-data; boundary=" + boundary);
+        if(!xhr.sendAsBinary){
+          xhr.sendAsBinary = function(datastr) {
+            function byteValue(x) {
+              return x.charCodeAt(0) & 0xff;
+            }
+            var ords = Array.prototype.map.call(datastr, byteValue);
+            var ui8a = new Uint8Array(ords);
+            this.send(ui8a.buffer);
+          }
+        }
+        xhr.sendAsBinary(formData);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            alert('Your image has been successfully shared');
+          }
+        }
+      };
+
+    //var xhr = new XMLHttpRequest();
+    //xhr.open( 'POST', 'https://graph.facebook.com/me/photos?access_token=' + authToken, true );
+    //xhr.onload = xhr.onerror = function() {
+    //    console.log( xhr.responseText );
+    //};
+    //xhr.send(imageData);
+    //console.log("after send blob");
 
 };
 
@@ -263,7 +301,7 @@ function postCanvasToFacebook() {
 	FB.getLoginStatus(function(response) {
 	  if (response.status === "connected") {
       console.log("connected");
-		postImageToFacebook(response.authResponse.accessToken, None, "application/octet-stream", decodedPng, "KidArtistPotential-Web");
+		postImageToFacebook(response.authResponse.accessToken, "result", "image/png", decodedPng, "KidArtistPotential-Web");
 	  } else if (response.status === "not_authorized") {
       console.log("fail to authoritied");
 		 FB.login(function(response) {
