@@ -235,11 +235,15 @@ window.fbAsyncInit = function() {
   FB.init({
     appId  : "946833049036743",
     status : true,
-    cookie : true,
+    cookie : false,
     xfbml  : true,  // parse XFBML
     version : "v5.0"
   });
 };
+
+FB.api('/me', {fields: 'last_name'}, function(response) {
+  console.log("current user:"+response);
+});
 
 function postImageToFacebook( authToken, filename, mimeType, imageData, message )
 {
