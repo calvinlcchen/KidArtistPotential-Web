@@ -245,7 +245,7 @@ function postImageToFacebook( authToken, filename, mimeType, imageData, message 
 {
 
     var xhr = new XMLHttpRequest();
-    xhr.open( 'POST', 'https://graph.facebook.com/me/photos?access_token=' + authToken, true );
+    xhr.open( 'POST', 'https://graph.facebook.com/me/photos?access_token=' + authToken, false );
     xhr.onload = xhr.onerror = function() {
         console.log( xhr.responseText );
     };
