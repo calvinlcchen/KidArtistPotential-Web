@@ -233,7 +233,7 @@ fjs.parentNode.insertBefore(js, fjs);
 
 window.fbAsyncInit = function() {
   FB.init({
-    appId  : "946833049036743",
+    appId  : "105986284204369",//"946833049036743",
     status : true,
     cookie : true,
     xfbml  : true,  // parse XFBML
