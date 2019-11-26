@@ -233,7 +233,7 @@ fjs.parentNode.insertBefore(js, fjs);
 
 window.fbAsyncInit = function() {
   FB.init({
-    appId  : "105986284204369",//"946833049036743",
+    appId  : "946833049036743",
     status : true,
     cookie : true,
     xfbml  : true,  // parse XFBML
@@ -278,6 +278,7 @@ function postImageToFacebook( authToken, filename, mimeType, imageData, message 
         xhr.onreadystatechange = function () {
           if (xhr.readyState == 4 && xhr.status == 200) {
             alert('Your image has been successfully shared');
+            console.log("completely sharing");
           }
         }
 
