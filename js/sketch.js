@@ -288,7 +288,6 @@ function postImageToFacebook( authToken, filename, mimeType, imageData, message 
     //};
     //xhr.send(imageData);
     //console.log("after send blob");
-
 };
 
 
