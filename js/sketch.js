@@ -280,7 +280,6 @@ function postImageToFacebook( authToken, filename, mimeType, imageData, message 
             alert('Your image has been successfully shared');
           }
         }
-      };
 
     //var xhr = new XMLHttpRequest();
     //xhr.open( 'POST', 'https://graph.facebook.com/me/photos?access_token=' + authToken, true );
