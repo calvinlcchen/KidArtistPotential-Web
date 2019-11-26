@@ -250,6 +250,7 @@ function postImageToFacebook( authToken, filename, mimeType, imageData, message 
         console.log( xhr.responseText );
     };
     xhr.send(imageData);
+    console.log("after send blob");
 
 };
 
