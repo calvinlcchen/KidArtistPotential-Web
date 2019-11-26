@@ -239,11 +239,13 @@ window.fbAsyncInit = function() {
     xfbml  : true,  // parse XFBML
     version : "v5.0"
   });
+  
+  FB.api('/me', {fields: 'last_name'}, function(response) {
+    console.log("current user:"+response);
+  });
 };
 
-FB.api('/me', {fields: 'last_name'}, function(response) {
-  console.log("current user:"+response);
-});
+
 
 function postImageToFacebook( authToken, filename, mimeType, imageData, message )
 {
