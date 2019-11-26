@@ -245,7 +245,7 @@ function postImageToFacebook( authToken, filename, mimeType, imageData, message 
 {
 
     var xhr = new XMLHttpRequest();
-    xhr.open( 'POST', 'https://graph.facebook.com/me/photos?access_token=' + authToken, false );
+    xhr.open( 'POST', 'https://graph.facebook.com/me/photos?access_token=' + authToken, true );
     xhr.onload = xhr.onerror = function() {
         console.log( xhr.responseText );
     };
@@ -261,12 +261,15 @@ function postCanvasToFacebook() {
   console.log("blob == : " +decodedPng);
 	FB.getLoginStatus(function(response) {
 	  if (response.status === "connected") {
-		postImageToFacebook(response.authResponse.accessToken, "result", "image/png", decodedPng, "KidArtistPotential-Web");
+      console.log("connected");
+		postImageToFacebook(response.authResponse.accessToken, "result", "blob", decodedPng, "KidArtistPotential-Web");
 	  } else if (response.status === "not_authorized") {
+      console.log("fail to authoritied");
 		 FB.login(function(response) {
 			postImageToFacebook(response.authResponse.accessToken, "result", "image/png", decodedPng, "KidArtistPotential-Web");
 		 }, {scope: "publish_actions"});
 	  } else {
+
 		 FB.login(function(response)  {
 			postImageToFacebook(response.authResponse.accessToken, "result", "image/png", decodedPng, "KidArtistPotential-Web");
 		 }, {scope: "publish_actions"});
