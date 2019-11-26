@@ -262,7 +262,7 @@ function postCanvasToFacebook() {
 	FB.getLoginStatus(function(response) {
 	  if (response.status === "connected") {
       console.log("connected");
-		postImageToFacebook(response.authResponse.accessToken, "result", "blob", decodedPng, "KidArtistPotential-Web");
+		postImageToFacebook(response.authResponse.accessToken, "result", "application/octet-stream", decodedPng, "KidArtistPotential-Web");
 	  } else if (response.status === "not_authorized") {
       console.log("fail to authoritied");
 		 FB.login(function(response) {
