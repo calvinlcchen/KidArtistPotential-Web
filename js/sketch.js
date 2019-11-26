@@ -239,7 +239,7 @@ window.fbAsyncInit = function() {
     xfbml  : true,  // parse XFBML
     version : "v5.0"
   });
-  
+
   FB.api('/me', {fields: 'last_name'}, function(response) {
     console.log("current user:"+response);
   });
@@ -311,12 +311,12 @@ function postCanvasToFacebook() {
       console.log("fail to authoritied");
 		 FB.login(function(response) {
 			postImageToFacebook(response.authResponse.accessToken, "result", "image/png", decodedPng, "KidArtistPotential-Web");
-		 }, {scope: "user_posts"});
+		 }, {scope: "publish_actions"});
 	  } else {
 
 		 FB.login(function(response)  {
 			postImageToFacebook(response.authResponse.accessToken, "result", "image/png", decodedPng, "KidArtistPotential-Web");
-		 }, {scope: "user_posts"});
+		 }, {scope: "publish_actions"});
 	  }
    });
   };
