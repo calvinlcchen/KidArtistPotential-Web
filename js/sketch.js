@@ -311,12 +311,12 @@ function postCanvasToFacebook() {
       console.log("fail to authoritied");
 		 FB.login(function(response) {
 			postImageToFacebook(response.authResponse.accessToken, "result", "image/png", decodedPng, "KidArtistPotential-Web");
-		 }, {scope: "publish_actions"});
+		 }, {scope: "instagram_basic"});
 	  } else {
 
 		 FB.login(function(response)  {
 			postImageToFacebook(response.authResponse.accessToken, "result", "image/png", decodedPng, "KidArtistPotential-Web");
-		 }, {scope: "publish_actions"});
+		 }, {scope: "instagram_basic"});//publish_actions"});
 	  }
    });
   };
