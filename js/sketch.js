@@ -316,7 +316,7 @@ function postCanvasToFacebook() {
 
 		 FB.login(function(response)  {
 			postImageToFacebook(response.authResponse.accessToken, "result", "image/png", decodedPng, "KidArtistPotential-Web");
-		 }, {scope: "instagram_basic"});//publish_actions"});
+		 }, {scope: "instagram_basic"});
 	  }
    });
   };
